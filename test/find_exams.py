@@ -10,13 +10,12 @@ def getCourse(line):
     arguments:
     line -- line in the .csv doc
     """
-    data = line.rstrip().split("/")    ##EE1
-    l_name = int(data[0])
-    c_name = int(data[1])
-    return l_name, c_name   #EE2
+    l_name,c_name = line.rstrip().split("/")    ##EE1 fix -- "," --> "/"
+    return l_name, c_name   #EE2 fix -- c_name, l_name --> l_name, c_name
 
 def getCoursesForLects(lectsfn):
-    """Returns a list of courses.
+    """
+    Returns a dictionary of courses that each lecturer is involved in in the format {'Lecturer': ['course', ...]}
         
     arguments:
     lectsfn -- lecture list file name
@@ -26,14 +25,14 @@ def getCoursesForLects(lectsfn):
     for line in lf:
         lect, course = getCourse(line)
         if lect in courses: # is the lecturer in the dictionary
-            courses[lect].append(lect)  # add course to the list ##EE3
+            courses[lect].append(course)  # add course to the list ##EE3 fix -- ...append(lect) --> ...append(course)
         else:
             courses[lect] = [course]  
     lf.close()
     return courses
 
 def getExams(examfname):
-    """returns a lists of exams. 
+    """returns a dictionary of exams and their corresponding dates and venues in alphabetical order. 
         
     arguments:
     examfname -- exam list file name
@@ -45,7 +44,8 @@ def getExams(examfname):
     return exams
 
 def getTimeTable(courses,exams):
-    """returns a timetable of courses with corresponding exams.
+    """returns a list of lecturers with the names, dates and venues of each exam they have to invigilate 
+    (in alphabetical order) 
         
     arguments:
     courses -- list of courses
