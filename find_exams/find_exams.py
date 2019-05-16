@@ -5,10 +5,22 @@ import re
 
 
 def getCourse(line):
-    l_name, c_name = line.rstrip().split(",")    ##EE1
-    return c_name, l_name   #EE2
+    """Returns a learner name and course name from a specific line.
+
+    arguments:
+    line -- line in the .csv doc
+    """
+    data = line.rstrip().split("/")    ##EE1
+    l_name = int(data[0])
+    c_name = int(data[1])
+    return l_name, c_name   #EE2
 
 def getCoursesForLects(lectsfn):
+    """Returns a
+        
+    arguments:
+    lectsfn -- lecture list file name
+    """
     courses = {}  # dictionary: for each lect returns list of courses
     lf = open(lectsfn)
     for line in lf:
@@ -21,6 +33,11 @@ def getCoursesForLects(lectsfn):
     return courses
 
 def getExams(examfname):
+    """ returns a lists of exams 
+        
+    arguments:
+    examfname -- exam list file name
+    """
     exams = {}
     for line in open(examfname):
         data = line.rstrip().split(",")
@@ -28,6 +45,11 @@ def getExams(examfname):
     return exams
 
 def getTimeTable(courses,exams):
+    """ returns a timetable of courses 
+        
+        arguments:
+	lectsfn --
+    """
     ttable = []  # nested list -- for each lect a list of exams
     for lect in sorted(courses.keys()):
         l_exams   = [] # build list of lecturer's exams
@@ -42,6 +64,11 @@ def getTimeTable(courses,exams):
     return ttable
 
 def showTimeTable(ttable):
+    """ returns a
+        
+        arguments:
+	lectsfn --
+    """
     for (lect, l_exams) in ttable:
         print(lect)
         for c,ex in l_exams:
