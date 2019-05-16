@@ -5,7 +5,7 @@ import re
 
 
 def getCourse(line):
-    """Returns a learner name and course name from a specific line.
+    """Returns a lecturer name and corresponding course name from a specific line.
 
     arguments:
     line -- line in the .csv doc
